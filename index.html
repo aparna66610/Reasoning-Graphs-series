@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Beyond RAG: Why Enterprise AI Needs Memory That Reasons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #FAF8F4; }
+  ::selection { background: #D9DCFA; }
+</style>
+
+
+<article style="--accent: #2C3AE0; --accent-soft: #E9EAFC; --ink: #1B1A17; --muted: #6E6A60; --bg: #FAF8F4; background: var(--bg); color: var(--ink); font-family: 'Newsreader', Georgia, serif; min-height: 100vh; -webkit-font-smoothing: antialiased;">
+
+  <!-- reading progress -->
+  <div style="position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 50; background: transparent;">
+    <div id="read-progress" style="height: 100%; width: 0%; background: var(--accent); transition: width 0.08s linear;"></div>
+  </div>
+
+  <!-- top bar -->
+  <header style="max-width: 1180px; margin: 0 auto; padding: 26px 40px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 11px;">
+      <div style="width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: #fff;"></div>
+      </div>
+      <span style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 13px;">Across</span>
+    </div>
+    <nav style="font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--muted); display: flex; gap: 28px;">
+      <span>Platform</span><span>Research</span><span>Blog</span>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section style="max-width: 820px; margin: 0 auto; padding: 40px 40px 20px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px;">Blog &middot; Enterprise AI</div>
+    <h1 style="font-size: clamp(40px, 6.4vw, 74px); line-height: 1.02; letter-spacing: -0.025em; font-weight: 500; margin: 0 0 28px;">Beyond RAG: why enterprise AI needs memory that <em style="font-style: italic; color: var(--accent);">reasons</em>.</h1>
+    <p style="font-size: clamp(20px, 2.4vw, 25px); line-height: 1.5; color: var(--muted); margin: 0 0 34px; max-width: 660px;">Everyone is racing to give AI a bigger memory of the moment. Almost no one is giving it a memory of your business. Here is the difference &mdash; and why it matters.</p>
+    <div style="display: flex; align-items: center; gap: 14px; font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: var(--muted); border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0;">
+      <span style="font-weight: 600; color: var(--ink);">The Across Team</span>
+      <span style="opacity: 0.5;">&bull;</span>
+      <span>8 min read</span>
+      <span style="opacity: 0.5;">&bull;</span>
+      <span>July 2026</span>
+    </div>
+  </section>
+
+  <!-- HOOK -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 44px 40px;">
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">Everyone is talking about bigger context windows. A million tokens. Two million. Whole codebases and quarterly reports dropped into a single prompt.</p>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">But context isn't memory. Giving a model a million tokens doesn't mean it understands your business. Every conversation, it still starts from scratch &mdash; a brilliant new hire who forgets everything the moment they walk out of the room.</p>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0;">That gap is the whole story.</p>
+  </section>
+
+  <!-- big statement -->
+  <section style="max-width: 980px; margin: 20px auto; padding: 0 40px;">
+    <blockquote style="margin: 0; padding: 52px 8px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); font-size: clamp(30px, 4.2vw, 46px); line-height: 1.18; letter-spacing: -0.02em; font-weight: 400;">
+      A model with a huge context window can <span style="color: var(--muted);">read</span> everything.<br>It still can't <em style="font-style: italic; color: var(--accent);">remember</em> anything.
+    </blockquote>
+  </section>
+
+  <!-- THE ENTERPRISE PROBLEM -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 48px 40px 24px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">01 &mdash; The enterprise problem</div>
+    <h2 style="font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">You don't just retrieve notes. You reason over them.</h2>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">Imagine you're about to join a customer call. In the ten seconds before it starts, your mind pulls up everything at once:</p>
+  </section>
+
+  <section style="max-width: 720px; margin: 0 auto; padding: 0 40px 30px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; font-family: 'Hanken Grotesk', sans-serif;">
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px 20px; font-size: 15px; font-weight: 500;">The last three meetings</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px 20px; font-size: 15px; font-weight: 500;">Who your champion is</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px 20px; font-size: 15px; font-weight: 500;">The legal blocker from March</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px 20px; font-size: 15px; font-weight: 500;">How procurement usually moves</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px 20px; font-size: 15px; font-weight: 500;">That the renewal looks shaky</div>
+    </div>
+  </section>
+
+  <section style="max-width: 680px; margin: 0 auto; padding: 6px 40px 24px;">
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">You don't experience these as separate files. You experience them as one connected picture, and you already know what it <em style="font-style: italic;">means</em> for this call. That's not retrieval. That's reasoning over memory.</p>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0; font-weight: 500;">Enterprise AI should work the same way. Mostly, it doesn't.</p>
+  </section>
+
+  <!-- WHY RAG ISN'T ENOUGH -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 48px 40px 20px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">02 &mdash; Why RAG isn't enough</div>
+    <h2 style="font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">RAG is a great librarian. It is not a great colleague.</h2>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">Retrieval-augmented generation &mdash; RAG &mdash; is genuinely good at one kind of question: <em style="font-style: italic;">&ldquo;Which document contains this?&rdquo;</em> Ask it something with an answer sitting in a file somewhere, and it will find the file.</p>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 8px;">But it was never designed for the questions that actually run a business:</p>
+  </section>
+
+  <section style="max-width: 760px; margin: 0 auto; padding: 8px 40px 34px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 26px;">
+        <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px;">RAG answers</div>
+        <p style="font-size: 20px; line-height: 1.4; margin: 0; font-style: italic;">&ldquo;Which contract mentions the SLA terms?&rdquo;</p>
+      </div>
+      <div style="background: var(--accent); color: #fff; border-radius: 16px; padding: 26px;">
+        <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; margin-bottom: 14px;">Business asks</div>
+        <p style="font-size: 20px; line-height: 1.4; margin: 0 0 14px; font-style: italic;">&ldquo;Should I escalate this opportunity?&rdquo;</p>
+        <p style="font-size: 20px; line-height: 1.4; margin: 0; font-style: italic;">&ldquo;Has this customer's sentiment changed over six months?&rdquo;</p>
+      </div>
+    </div>
+    <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; color: var(--muted); text-align: center; margin: 22px 0 0;">Those aren't lookups. They require memory.</p>
+  </section>
+
+  <!-- MEMORY ISN'T STORAGE -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 48px 40px 20px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">03 &mdash; Memory isn't storage</div>
+    <h2 style="font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">A hard drive stores. Memory understands.</h2>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 30px;">Saving every email and transcript isn't memory &mdash; it's a warehouse. Real enterprise memory carries the things a warehouse can't:</p>
+  </section>
+
+  <section style="max-width: 900px; margin: 0 auto; padding: 0 40px 40px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: rgba(0,0,0,0.09); border: 1px solid rgba(0,0,0,0.09); border-radius: 16px; overflow: hidden; font-family: 'Hanken Grotesk', sans-serif;">
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">01</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Facts</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">What is true right now.</div></div>
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">02</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Relationships</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">How things connect to each other.</div></div>
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">03</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Permissions</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">Who is allowed to know what.</div></div>
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">04</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Confidence</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">How sure we are, and why.</div></div>
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">05</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Business process</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">How work actually gets done here.</div></div>
+      <div style="background: var(--bg); padding: 28px 26px;"><div style="font-size: 30px; margin-bottom: 8px; color: var(--accent);">06</div><div style="font-size: 17px; font-weight: 600; margin-bottom: 6px;">Time</div><div style="font-size: 14px; color: var(--muted); line-height: 1.5;">How all of it changes and evolves.</div></div>
+    </div>
+  </section>
+
+  <!-- REASONING GRAPHS (visual) -->
+  <section style="background: var(--ink); color: var(--bg); margin: 40px 0 0; padding: 76px 0;">
+    <div style="max-width: 680px; margin: 0 auto; padding: 0 40px;">
+      <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #9AA0F5; margin-bottom: 18px;">04 &mdash; Reasoning graphs</div>
+      <h2 style="font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">Imagine a CRM where every record could think.</h2>
+      <p style="font-size: 21px; line-height: 1.72; margin: 0 0 22px; color: #D9D6CE;">Picture everything your company already tracks &mdash; accounts, meetings, emails, tickets, forecasts, policies. Today they sit in neat little boxes, each one blind to the others.</p>
+      <p style="font-size: 21px; line-height: 1.72; margin: 0 0 12px; color: #D9D6CE;">Now imagine the lines <em style="font-style: italic; color: #fff;">between</em> those boxes waking up &mdash; a living network that updates itself the moment anything changes. That's a reasoning graph.</p>
+    </div>
+
+    <!-- simple node graph -->
+    <div style="max-width: 900px; margin: 44px auto 0; padding: 0 40px;">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 20px;">
+        <svg viewBox="0 0 720 420" style="width: 100%; height: auto; display: block; font-family: 'Hanken Grotesk', sans-serif;">
+          <g stroke="#5561E8" stroke-width="1.5" opacity="0.55">
+            <line x1="360" y1="210" x2="160" y2="90"></line>
+            <line x1="360" y1="210" x2="560" y2="90"></line>
+            <line x1="360" y1="210" x2="120" y2="230"></line>
+            <line x1="360" y1="210" x2="600" y2="230"></line>
+            <line x1="360" y1="210" x2="200" y2="350"></line>
+            <line x1="360" y1="210" x2="520" y2="350"></line>
+            <line x1="160" y1="90" x2="560" y2="90" stroke-dasharray="4 5"></line>
+            <line x1="120" y1="230" x2="200" y2="350" stroke-dasharray="4 5"></line>
+            <line x1="600" y1="230" x2="520" y2="350" stroke-dasharray="4 5"></line>
+          </g>
+          <g>
+            <circle cx="360" cy="210" r="52" fill="#2C3AE0"></circle>
+            <text x="360" y="205" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Your</text>
+            <text x="360" y="223" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">business</text>
+          </g>
+          <g font-size="13" font-weight="600" fill="#17161C">
+            <g><circle cx="160" cy="90" r="38" fill="#EDEBFF"></circle><text x="160" y="95" text-anchor="middle">Accounts</text></g>
+            <g><circle cx="560" cy="90" r="38" fill="#EDEBFF"></circle><text x="560" y="95" text-anchor="middle">Meetings</text></g>
+            <g><circle cx="120" cy="230" r="38" fill="#EDEBFF"></circle><text x="120" y="235" text-anchor="middle">Emails</text></g>
+            <g><circle cx="600" cy="230" r="38" fill="#EDEBFF"></circle><text x="600" y="235" text-anchor="middle">Tickets</text></g>
+            <g><circle cx="200" cy="350" r="38" fill="#EDEBFF"></circle><text x="200" y="355" text-anchor="middle">Forecasts</text></g>
+            <g><circle cx="520" cy="350" r="38" fill="#EDEBFF"></circle><text x="520" y="355" text-anchor="middle">Policies</text></g>
+          </g>
+        </svg>
+        <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #9AA0F5; text-align: center; margin: 6px 0 4px;">Each record is a node. Every meaningful connection is an edge. Change one, and the whole picture responds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 60px 40px 20px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">05 &mdash; Trust</div>
+    <h2 style="font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">Good memory has to know when to forget.</h2>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">This is the part most people skip. Enterprise memory has to remember &mdash; but it also has to forget, on purpose, at the right moment.</p>
+  </section>
+
+  <section style="max-width: 720px; margin: 0 auto; padding: 0 40px 30px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; font-family: 'Hanken Grotesk', sans-serif;">
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; font-size: 15px; font-weight: 500;">Permissions change</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; font-size: 15px; font-weight: 500;">Data expires</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; font-size: 15px; font-weight: 500;">Employees leave</div>
+      <div style="background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; font-size: 15px; font-weight: 500;">Customers revoke access</div>
+    </div>
+  </section>
+
+  <section style="max-width: 980px; margin: 10px auto; padding: 0 40px;">
+    <blockquote style="margin: 0; padding: 48px 8px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); font-size: clamp(28px, 3.8vw, 44px); line-height: 1.16; letter-spacing: -0.02em; font-weight: 400;">
+      Memory without governance isn't intelligence.<br>It's <em style="font-style: italic; color: var(--accent);">liability</em>.
+    </blockquote>
+  </section>
+
+  <!-- CLOSING -->
+  <section style="max-width: 680px; margin: 0 auto; padding: 54px 40px 30px;">
+    <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">06 &mdash; Closing</div>
+    <h2 style="font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 26px;">The future isn't a bigger context window.</h2>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0 0 26px;">It's agents that learn responsibly over time &mdash; that remember what matters, forget what they shouldn't hold, and reason over the whole picture the way a good colleague does.</p>
+    <p style="font-size: 21px; line-height: 1.72; margin: 0;">That sounds a lot like <span style="color: var(--accent); font-weight: 500;">Across</span>.</p>
+  </section>
+
+  <!-- CTA -->
+  <section style="max-width: 900px; margin: 30px auto 0; padding: 0 40px 90px;">
+    <div style="background: var(--accent); color: #fff; border-radius: 24px; padding: clamp(40px, 6vw, 68px); text-align: center;">
+      <h3 style="font-size: clamp(26px, 3.4vw, 38px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 16px;">Give your agents a memory that reasons.</h3>
+      <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 17px; line-height: 1.55; margin: 0 auto 30px; max-width: 440px; opacity: 0.85;">See how Across turns scattered business knowledge into living, governed memory.</p>
+      <a href="#" style="display: inline-block; background: #fff; color: var(--accent); font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 15px; text-decoration: none; padding: 15px 32px; border-radius: 999px;">Request a walkthrough</a>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(0,0,0,0.1); font-family: 'Hanken Grotesk', sans-serif;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted);">
+      <span style="font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink);">Across</span>
+      <span>&copy; 2026 Across AI &middot; Memory that reasons</span>
+    </div>
+  </footer>
+
+</article>
+
+<script>
+(function () {
+  var onScroll = function () {
+    var el = document.getElementById('read-progress');
+    var doc = document.documentElement;
+    var max = (doc.scrollHeight - doc.clientHeight) || 1;
+    var pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+    if (el) el.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
